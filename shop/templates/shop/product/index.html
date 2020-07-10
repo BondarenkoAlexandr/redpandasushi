@@ -1,0 +1,45 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Red Panda Sushi{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="main-content_title">
+        {% if category %}{{ category.name }}{% else %}Наша продукция{% endif %}
+    </div>
+    <div id="main" class="main-content_block">
+        {% for product in posts %}
+        <div class="main-content_block-item">
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" alt="">
+            <div class="main-content_block-item_title">
+                <span class="main-content_block-item_title-main">
+                    <a href="{{product.get_absolute_url}}">{{ product.name }}</a>
+                </span>
+
+                <span class="main-content_block-item_title-span">
+                    320 г
+                </span>
+            </div>
+            <div class="main-content_block-item_make">
+                {{product.description}}
+            </div>
+            <div class="main-content_block-item_buy">
+                <div class="main-content_block-item_price">
+                    ₴{{ product.price }} <span class="main-content_block-item_price-gram">320 г</span>
+                </div>
+                <form class="add_to_cart" data-action="{% url 'cart:cart_add' product.id %}" method="post">
+                    {{ cart_product_form }}
+                    {% csrf_token %}
+                    <button class="main-content_block-item_btn" type="submit">
+                        В корзину
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% include "shop/product/pagination.html" with page=posts %}
+</div>
+{% endblock %}

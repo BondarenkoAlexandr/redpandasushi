@@ -1,0 +1,30 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    Новости и акции
+{% endblock %}
+{% block content %}
+<div class="main-content">
+<div class="main-content_title">
+    Новости и акции
+</div>
+<div class="main-content_news">
+{% for c in articles %}
+    <div class="main-content_news-item">
+        <img src="{{c.image.url}}" alt="">
+        <div class="main-content_news-item_date">
+            {{c.created}}
+        </div>
+        <div class="main-content_news-item_title">
+            <a href="{{c.get_absolute_url}}">
+                {{c.title}}
+            </a>
+        </div>
+        <div class="main-content_news-item_desc">
+            {{c.text}}
+        </div>
+    </div>
+{% endfor %}
+</div>
+</div>
+{% endblock %}

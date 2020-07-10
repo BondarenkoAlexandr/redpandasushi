@@ -1,0 +1,333 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" lang="ru"
+        content="Создание сайтов для малого и среднего бизнеса. Разработка сайтов. Верстка сайтов. Создание Landing Page, корпоративных сайтов, сайты на WordPress. Создать интернет магазин. " />
+
+    <!-- <link rel="stylesheet" href="css/slick.css"> -->
+    <link rel="shortcut icon" type="image/png" href="img/" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/preloader.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="wrapper">
+            <img class="circle circle-1" src="{% static 'img/sushi-pre1.svg' %}"></img>
+            <img class="circle circle-1a" src="{% static 'img/sushi-pre1.svg' %}"></img>
+            <img class="circle circle-2" src="{% static 'img/sushi-pre1.svg' %}"></img>
+            <img class="circle circle-3" src="{% static 'img/sushi-pre1.svg' %}"></img>
+        </div>
+        <h1>Загружаемся&hellip;</h1>
+    </div>
+    <header class="header">
+        <div class="header-navigation">
+            <div class="header-navigation_logo">
+                <a href="/"><img class="lazy" data-src="{% static 'img/logo3.png' %}" alt=""></a>
+            </div>
+            <nav class="header-navigation_menu">
+                <img class="lazy header-navigation_menu-logo" data-src="{% static 'img/logo3.png'%}" alt="">
+                <ul id="menu">
+                    <li><a href="/">Главная</a></li>
+                    <li><a href="/menu/">Меню</a></li>
+                    <li><a href="/delivery/">Доставка</a></li>
+                    <li><a href="/news/">Акции и новости</a></li>
+                </ul>
+                <div class="header-navigation_menu-close">
+                    <img class="img-svg" src="{% static 'img/close.svg' %}" alt="">
+                </div>
+            </nav>
+            <div class="header-navigation_social">
+                <div class="header-navigation_social-phone">
+                    <a class="hide" href="tel:+380637729864"> 063 772 98 64</a>
+                    <a href="tel:+3800683084025"><img class="img-svg" src="{% static 'img/phone.svg' %}" alt=""> 068 308
+                        40 25</a>
+                    <a class="hide" href="tel:+3800993929074">099 392 90 74</a>
+                </div>
+                <div class="header-navigation_social-cites">
+                    <a href="https://www.instagram.com/red.panda.sushi/?hl=uk"><span>Наш инстаграм</span><img
+                            class="img-svg" src="{% static 'img/instagram-sketched.svg' %}" alt=""></a>
+                </div>
+            </div>
+            <div class="header-navigation_mobile">
+                <div class="header-navigation_mobile-inst">
+                    <a href="https://www.instagram.com/red.panda.sushi/?hl=uk"><img class='img-svg'
+                            src="{% static 'img/instagram-sketched.svg' %}" alt=""></a>
+                </div>
+                <div class="header-navigation_mobile-phone mobile-show">
+                    <img class='img-svg' src="{% static 'img/phone.svg' %}" alt="">
+                    <div class="header-navigation_mobile-phone_block">
+                        <a href="tel:+380637729864"> 063 772 98 64</a>
+                        <a href="tel:+3800683084025"> 068 308 40 25</a>
+                        <a href="tel:+3800993929074">099 392 90 74</a>
+                    </div>
+                </div>
+                <div class="header-navigation_mobile-humburger">
+                    <img class='img-svg' src="{% static 'img/open-menu.svg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="main">
+        <div class="main-menu">
+            {% for c in categories %}
+            <div class="main-menu_item" {% if category.slug == c.slug %}class="selected" {% endif %}>
+                <img class="img-svg" src="{{ c.image.url }}" alt="">
+                <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="main-basket">
+            <img class="img-svg" src="{% static 'img/basket.svg' %}" alt="">
+        </div>
+        {% block content %}
+        {% endblock %}
+        <div class="main-offer">
+            <div class="main-offer_ttl">
+                <h3 class="main-offer_title">
+                    Ваш заказ
+                </h3>
+                <div class="main-offer_ttl-item">
+                    <img class="img-svg basket-close" src="{% static 'img/arrow.svg' %}" alt="">
+                </div>
+            </div>
+            <div class="main-offer_list">
+                {% include 'shop/product/cart.html' %}
+            </div>
+            <form class="main-form" action="send.php" method="post">
+                <div class="main-form_contact">
+                    <h3 class="main-form_contact-title">Личные данные</h3>
+                    <div class="main-form_contact-label">
+                        Имя<span>*</span>
+                    </div>
+                    <input required type="text" class="main-form_contact-input">
+                    <div class="main-form_contact-label">
+                        Телефон<span>*</span>
+                    </div>
+                    <input required type="text" class="main-form_contact-input">
+                </div>
+                <div class="main-form_destination">
+                    <h3 class="main-form_destination-title">
+                        Доставка
+                    </h3>
+                    <div class="main-form_destination-subtitle">
+                        <a href="#"><img class="img-svg" src="{% static 'img/info.svg' %}" alt=""></a> <span>Детальнее о
+                            доставке</span>
+                    </div>
+                    <div class="main-form_destination-flex">
+                        <div class="main-form_destination-flex_item">
+                            <div class="main-form_destination-label">
+                                Улица<span>*</span>
+                            </div>
+                            <input required type="text" class="main-form_destination-input">
+                        </div>
+                        <div class="main-form_destination-flex_item">
+                            <div class="main-form_destination-label">
+                                Дом<span>*</span>
+                            </div>
+                            <input required type="text" class="main-form_destination-input">
+                        </div>
+                        <div class="main-form_destination-flex_item">
+                            <div class="main-form_destination-label">
+                                Подьезд
+                            </div>
+                            <input type="text" class="main-form_destination-input">
+                        </div>
+                        <div class="main-form_destination-flex_item">
+                            <div class="main-form_destination-label">
+                                Корпус
+                            </div>
+                            <input type="text" class="main-form_destination-input">
+                        </div>
+                        <div class="main-form_destination-flex_item">
+                            <div class="main-form_destination-label">
+                                Квартира
+                            </div>
+                            <input type="text" class="main-form_destination-input">
+                        </div>
+                        <div class="main-form_destination-flex_item">
+                            <div class="main-form_destination-label">
+                                Этаж
+                            </div>
+                            <input type="text" class="main-form_destination-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="main-form_payment">
+                    <h3 class="main-form_payment-title">
+                        Способ оплаты
+                    </h3>
+                    <div class="main-form_payment-check">
+                        <input type="radio" checked id="cash" name="cash">
+                        <label for="cash">Наличными курьеру</label>
+                    </div>
+                    <div class="main-form_payment-check">
+                        <input type="radio" id="card" name="cash">
+                        <label for="card">Оплата картой на сайте</label>
+                    </div>
+                    <div class="main-form_payment-back">
+                        <div class="main-form_payment-label">
+                            Подготовить сдачу с
+                        </div>
+                        <input type="text" class="main-form_payment-input">
+                    </div>
+                </div>
+                <div class="main-form_comment">
+                    <h3 class="main-form_comment-title">Комментарий</h3>
+                    <div class="main-form_comment-label">
+                        Количество персон
+                    </div>
+                    <select class="main-form_comment-select">
+                        <option>1 человек</option>
+                        <option>2 человека</option>
+                        <option>3 человека</option>
+                        <option>4 человека</option>
+                        <option>5 человек</option>
+                        <option>Больше 5 человек</option>
+                    </select>
+                    <div class="main-form_comment-label">
+                        Примечание к заказу
+                    </div>
+                    <textarea type="text" class="main-form_comment-textarea"></textarea>
+                </div>
+                <div class="main-form_price">
+                    <div class="main-form_price-description">
+                        Минимальная сумма заказа 350 грн
+                    </div>
+                    <div class="main-form_price-flex">
+                        <div class="main-form_price-total">
+                            Итого: <span id="cart_total">{{ cart.get_total_price }} грн</span>
+                        </div>
+                        <button class="main-form_price-btn" type="submit">Оформить заказ</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-img">
+            <img class="footer-content_logo" src="{% static 'img/logo3.png' %}" alt="logo">
+            <div class="footer-img_text">
+                Для тех <br> кто ценит качество
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-content_text footer-content_tel">
+                Телефон:
+            </div>
+            <a href="tel:+380637729864">+38 (063) 772 98 64</a>
+            <a href="tel:+3800683084025">+38 (068) 308 40 25</a>
+            <a href="tel:+380993929074">+38 (099) 392 90 74</a>
+            <div class="footer-content_text footer-content_inst">
+                Инстаграм: <a class="footer-content_inst-link"
+                    href="https://www.instagram.com/red.panda.sushi/?hl=uk"><img class="img-svg"
+                        src="{% static 'img/instagram-sketched.svg' %}" alt=""></a>
+            </div>
+        </div>
+        <div class="footer-uslugi">
+            <div class="footer-uslugi_title">
+                Услуги
+            </div>
+            <div class="footer-uslugi_link">
+                <a href="/">Главная</a>
+                <a href="/menu/">Меню</a>
+                <a href="/delivery/">Доставка</a>
+                <a href="/news/">Новости и акции</a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@12.4.0/dist/lazyload.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+    </script>
+    <script>
+        $('img.img-svg').each(function () {
+            var $img = $(this);
+            var imgClass = $img.attr('class');
+            var imgURL = $img.attr('src');
+            $.get(imgURL, function (data) {
+                var $svg = $(data).find('svg');
+                if (typeof imgClass !== 'undefined') {
+                    $svg = $svg.attr('class', imgClass + ' replaced-svg');
+                }
+                $svg = $svg.removeAttr('xmlns:a');
+                if (!$svg.attr('viewBox') && $svg.attr('height') && $svg.attr('width')) {
+                    $svg.attr('viewBox', '0 0 ' + $svg.attr('height') + ' ' + $svg.attr('width'))
+                }
+                $img.replaceWith($svg);
+            }, 'xml');
+        });
+        $('body').find('select').css({ 'display': 'none' });
+        $('body').find('label').css({ 'display': 'none' });
+        $(".add_to_cart").submit(function (e, addr) {
+            e.preventDefault();
+            var quantity = $(this).find('select option:selected').val();
+            console.log(quantity);
+            $.ajax({
+                type: "POST",
+                url: String($(this).data("action")),
+                data: { csrfmiddlewaretoken: csrftoken, quantity: quantity },
+                success: function (data) {
+                    console.log(data);
+                    $('.main-offer_list').html(data);
+                    $('#cart_total').html($('input[name="cart_price"]').val() + ' грн');
+                }
+            });
+        });
+        $('.main-offer_list').on("click", ".delete-btn", function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: String($(this).data("delete")),
+                data: { csrfmiddlewaretoken: csrftoken },
+                success: function (data) {
+                    $('.main-offer_list').html(data);
+                    $('#cart_total').html($('input[name="cart_price"]').val() + ' грн');
+                }
+            });
+        });
+        
+    </script>
+
+</body>
+
+</html>

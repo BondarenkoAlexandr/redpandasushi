@@ -1,0 +1,38 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {% if article %}{{ article.title }}{% else %}Новости{% endif %}
+{% endblock %}
+{% block content %}
+<div class="main-content">
+        <div class="main-content_newsCard">
+            <div class="main-content_newsCard-title">
+                {{ article.title }}
+            </div>
+            <div class="main-content_newsCard-block">
+                <img class="img-svg" src="{{ article.image.url }}" alt="">
+                <div class="main-content_newsCard-block_item">
+                    <div class="main-content_newsCard-block_title">
+                        {{ article.title }}  
+                    </div>
+                    <div class="main-content_newsCard-block_subtitle">
+                        {% if article.subtitle %}{{ article.subtitle }}{% else %}{% endif %}
+                    </div>
+                    <ul class="main-content_newsCard-block_list">
+                        <li>- Атлантика</li>
+                        <li>- Американо</li>
+                        <li>- Поло</li>
+                    </ul>
+                    <div class="main-content_newsCard-block_text">
+                        {{article.text}}
+                    </div>
+                    <a href="#" class="main-content_newsCard-block_back">
+                        <img class="img-svg" src="{% static 'img/arrows.svg' %}" alt="">
+                        <span>
+                            Вернуться к остальным новостям
+                        </span>
+                    </a>
+                </div>
+            </div>
+</div>
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    {% if product %}{{ product.name }}{% else %}Red Panda Sushi{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="main-content_card">
+        <div class="main-content_card-block">
+            <div class="main-content_card-img">
+                <img src="{{ product.image.url }}" alt="">
+            </div>
+            <div class="main-content_card-info">
+                <span class="main-content_card-info_title">
+                    {{ product.name }}
+                </span>
+                <div class="main-content_card-info_weight">
+                    Вес: <span>320 г.</span>
+                </div>
+                <div class="main-content_card-info_make">
+                    {{product.description}}
+                </div>
+                <div class="main-content_card-info_buy">
+                    <div class="main-content_card-info_price">
+                        {{ product.price }} грн. <span class="main-content_card-info-gram">320 г</span>
+                    </div>
+                    <form class="add_to_cart" data-action="{% url 'cart:cart_add' product.id %}" method="post">
+                        {{ cart_product_form }}
+                        {% csrf_token %}
+                        <button class="main-content_block-item_btn" type="submit">
+                            В корзину
+                        </button>
+                    </form>
+                </div>
+                <div class="main-content_card-info_delivery">
+                    <img class="img-svg" src="img/delivery.svg" alt="">
+                    <span>
+                        Бесплатная доставка при заказе на сумму от 350 грн.
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="main-content_card-recomendation">
+            <div class="main-content_card-recomendation_drink">
+                <div class="main-content_card-recomendation_drink-title">
+                    Рекомендуем напитки к данному блюду:
+                </div>
+                <div class="main-content_card-recomendation_drink-slider">
+                    {% for d in napitki %}
+                    <div class="main-content_card-recomendation_drink-slider_item">
+                        <div class="main-content_block-item">
+                            <img src="{{d.image.url}}" alt="">
+                            <div class="main-content_block-item_title">
+                                <span class="main-content_block-item_title-main">
+                                    {{ d.name }}
+                                </span>
+        
+                                <span class="main-content_block-item_title-span">
+                                    320 г
+                                </span>
+                            </div>
+                            <div class="main-content_block-item_make">
+                                {{d.description}}
+                            </div>
+                            <div class="main-content_block-item_buy">
+                                <div class="main-content_block-item_price">
+                                    {{d.price}} грн. <span class="main-content_block-item_price-gram">320 г</span>
+                                </div>
+                                <form class="add_to_cart" data-action="{% url 'cart:cart_add' d.id %}" method="post">
+                                    {{ cart_product_form }}
+                                    {% csrf_token %}
+                                    <button class="main-content_block-item_btn" type="submit">
+                                        В корзину
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="main-content_card-recomendation">
+            <div class="main-content_card-recomendation_snacks">
+                <div class="main-content_card-recomendation_snacks-title">
+                    Рекомендуем попробовать:
+                </div>
+                <div class="main-content_card-recomendation_snacks-slider">
+                    {% for d in eat %}
+                    <div class="main-content_card-recomendation_drink-slider_item">
+                        <div class="main-content_block-item">
+                            <img src="{{d.image.url}}" alt="">
+                            <div class="main-content_block-item_title">
+                                <span class="main-content_block-item_title-main">
+                                    {{d.name}}
+                                </span>
+        
+                                <span class="main-content_block-item_title-span">
+                                    320 г
+                                </span>
+                            </div>
+                            <div class="main-content_block-item_make">
+                                {{d.description}}
+                            </div>
+                            <div class="main-content_block-item_buy">
+                                <div class="main-content_block-item_price">
+                                    {{d.price}} грн. <span class="main-content_block-item_price-gram">320 г</span>
+                                </div>
+                                <form class="add_to_cart" data-action="{% url 'cart:cart_add' d.id %}" method="post">
+                                    {{ cart_product_form }}
+                                    {% csrf_token %}
+                                    <button class="main-content_block-item_btn" type="submit">
+                                        В корзину
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

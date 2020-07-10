@@ -1,0 +1,20 @@
+{% load static %}
+{% for item in cart %}
+        {% with product=item.product %}
+        <div class="main-offer_list-item">
+            <div class="main-offer_list-info">
+                <div class="main-offer_list-title">
+                    {{ product.name }}
+                </div>
+                <div class="main-offer_list-calc">
+                    {{item.quantity}}
+                </div>
+            </div>
+            <img src="{{ product.image.url }}" alt="">
+            <div class="main-offer_list-close">
+                <a class="delete-btn" data-delete="{% url 'cart:cart_remove' product.id %}"><img class="img-svg" src="{% static 'img/close.svg' %}" alt=""></a>
+            </div>
+        </div>
+        {% endwith %}
+{% endfor %}
+<input type="hidden" name="cart_price" value="{{ cart.get_total_price }}">

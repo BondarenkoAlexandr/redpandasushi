@@ -1,0 +1,75 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+    Доставка
+{% endblock %}
+{% block content %}
+<div class="main-content main-content_deliveryFlex">
+    <div class="main-content_left">
+        <div class="main-content_title">
+            Доставка
+        </div>
+        <div class="main-content_delivery">
+            <div class="main-content_delivery-subtitle">
+
+            </div>
+            <div class="main-content_delivery-title">
+                Как сделать заказ
+            </div>
+            <div class="main-content_delivery-block">
+                <div class="main-content_delivery-block_item">
+                    <img class="img-svg" src="{% static 'img/search.svg'%}" alt="">
+                    <div class="main-content_delivery-block_text">
+                        На сайте
+                    </div>
+                </div>
+                <div class="main-content_delivery-block_item">
+                    <img class="img-svg" src="{% static 'img/phone-delivery.svg'%}" alt="">
+                    <div class="main-content_delivery-block_text">
+                        По телефону
+                    </div>
+                </div>
+            </div>
+            <div class="main-content_delivery-title">
+                Оплата
+            </div>
+            <div class="main-content_delivery-block">
+                <div class="main-content_delivery-block_item">
+                    <img class="img-svg" src="{% static 'img/delivery.svg'%}" alt="">
+                    <div class="main-content_delivery-block_text">
+                        Наличными курьеру
+                    </div>
+                </div>
+                <div class="main-content_delivery-block_item">
+                    <img class="img-svg" src="{% static 'img/credit-card.svg'%}" alt="">
+                    <div class="main-content_delivery-block_text">
+                        Оплата картой
+                    </div>
+                </div>
+            </div>
+            <div class="main-content_delivery-title">
+                Как получить заказ
+            </div>
+            <div class="main-content_delivery-block">
+                <div class="main-content_delivery-block_item">
+                    <img class="img-svg" src="{% static 'img/food-delivery.svg'%}" alt="">
+                    <div class="main-content_delivery-block_text">
+                        Доставка курьером
+                    </div>
+                </div>
+                <div class="main-content_delivery-block_item">
+                    <img class="img-svg" src="{% static 'img/salesman.svg'%}" alt="">
+                    <div class="main-content_delivery-block_text">
+                        Предзаказ на указанное время 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-content_right">
+        <div class="main-content_right-title">
+            К заказам, в зависимости от количества суши и роллов, бесплатно прилагается порция имбиря, а также палочки на выбор (учебные или обычные), соевый соус и васаби по количеству приборов.
+        </div>
+    </div>
+</div>
+{% endblock %}
