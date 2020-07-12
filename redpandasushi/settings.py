@@ -25,7 +25,7 @@ SECRET_KEY = '&-@%=jk)kw6oao5%t&9gna036b^sw3cy@wa!(btuw59t&!dxjb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['185.25.116.72']
 
 
 # Application definition
@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'redpandasushi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'redpandasushibd',
+        'USER': 'redpandasushiuser',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
